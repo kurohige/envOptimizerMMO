@@ -339,9 +339,9 @@ Ad-hoc runs use the `defaultProfile` entry in `games.json`, which is conservativ
 
 MIT — see `LICENSE`. Use freely, attribute if you publish derivatives, no warranty.
 
-## Contributing
+## Contributions policy
 
-Issues and PRs welcome. Particularly:
-- Game profiles for other MMOs (FFXIV, Lost Ark, WoW, Guild Wars 2) with measurements/evidence for the affinity strategy chosen.
-- Corrections to any of the research citations — if Microsoft publishes authoritative guidance that contradicts something in this README, it should be updated.
-- Reports of BDO affinity behavior on Intel Core Ultra (Arrow Lake / Lunar Lake), where current community wisdom is still forming.
+This repository does not accept pull requests. A GitHub Actions workflow auto-closes any PR from non-owners with a polite note pointing to Issues.
+
+- **Issues are welcome** — bug reports, documentation errors, recommendations that look wrong or outdated, reports of BDO affinity behavior on Intel Core Ultra (Arrow Lake / Lunar Lake), all fair game.
+- **Want to change the code?** Fork the repo freely (MIT license) and maintain your own version. You are not required to coordinate with this repo.

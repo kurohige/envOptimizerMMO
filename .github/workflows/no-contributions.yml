@@ -1,0 +1,45 @@
+name: Reject external pull requests
+
+# This repository does not accept external contributions. This workflow
+# auto-closes any pull request opened by someone who is not the owner
+# with a polite message. Issues remain open as the supported feedback channel.
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  close:
+    if: github.event.pull_request.author_association != 'OWNER' && github.event.pull_request.author_association != 'COLLABORATOR'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment and close
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = [
+              "Thanks for your interest — but this repository does not accept external contributions.",
+              "",
+              "You are free to **fork** the repo and maintain your own version.",
+              "If you want to report a bug or suggest an improvement, please open an **Issue** instead — that's the supported feedback channel here.",
+              "",
+              "This pull request will now be closed automatically."
+            ].join("\n");
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              state: 'closed'
+            });
