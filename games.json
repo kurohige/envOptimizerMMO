@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json.schemastore.org/base.json",
+  "_comment": "Game profiles registry. Each profile maps topology families to named affinity strategies. The resolver (_GameProfile.ps1) detects the live topology family and picks the strategy. To add a new game, copy the BDO entry and edit processName + affinityStrategy. Strategy names are documented in _GameProfile.ps1.",
+
+  "_strategyReference": {
+    "None":                        "No affinity change. Safest.",
+    "AllCores":                    "Use every core with SMT enabled.",
+    "AllPCoresKeepHT":             "P-cores only on Intel hybrid; keep HT. All cores on non-hybrid.",
+    "AllPCoresNoHT":               "P-cores only, one LP per core (disables HT in software).",
+    "AllCoresNoSMT":               "All cores, one LP each (disables SMT in software).",
+    "AllCoresNoSMTSkipCore0":      "All cores except the one owning LP 0, SMT off.",
+    "SixPCoresNoHTSkipCore0":      "Up to 6 P-cores, skip core 0, no HT. Intel classic BDO recipe.",
+    "BDO-Aggressive":              "BDO hybrid-Intel recipe: 6 P-cores, no HT, skip core 0, no E-cores. Matches 13900K 0x1554.",
+    "VCacheCCDOnly-NoSMT":         "AMD X3D dual-CCD: pin to V-Cache die, SMT off.",
+    "FirstCCDOnly-NoSMT":          "Isolate to first CCD on multi-CCD AMD (non-X3D).",
+    "SecondCCDOnly-NoSMT-SixCores":"Isolate to second CCD, cap at 6 cores, SMT off. BDO guide convention for Ryzen 9 non-X3D."
+  },
+
+  "profiles": [
+    {
+      "id": "BDO",
+      "displayName": "Black Desert Online",
+      "processName": "BlackDesert64",
+      "launcherHint": "BlackDesertLauncher.exe",
+      "affinityStrategy": {
+        "intelHybrid":         "BDO-Aggressive",
+        "intelClassic":        "SixPCoresNoHTSkipCore0",
+        "amdX3DDualCCD":       "VCacheCCDOnly-NoSMT",
+        "amdMultiCCD":         "SecondCCDOnly-NoSMT-SixCores",
+        "amdSingleCCD8Plus":   "AllCoresNoSMTSkipCore0",
+        "amdSingleCCDSmall":   "AllCoresNoSMT",
+        "fallback":            "None"
+      },
+      "priorityClass": "Normal",
+      "notes": "Based on ACanadianDude's Ultimate BDO Performance Guide plus community testing. BDO does not benefit from SMT/HT and regresses with >6 active P-cores after extended play. On AMD X3D dual-CCD parts the V-Cache die is strongly preferred (large shared L3 benefits BDO's open-world asset access)."
+    }
+  ],
+
+  "defaultProfile": {
+    "_comment": "Conservative default for unknown games. Only restricts to P-cores on Intel hybrid (E-cores hurt most games due to lower clocks and smaller cache) and pins to V-Cache CCD on AMD X3D dual-CCD (where Xbox Game Bar's auto-detect may not have flagged this game).",
+    "affinityStrategy": {
+      "intelHybrid":         "AllPCoresKeepHT",
+      "intelClassic":        "None",
+      "amdX3DDualCCD":       "VCacheCCDOnly-NoSMT",
+      "amdMultiCCD":         "None",
+      "amdSingleCCD8Plus":   "None",
+      "amdSingleCCDSmall":   "None",
+      "fallback":            "None"
+    },
+    "priorityClass": "Normal",
+    "notes": "Safe baseline. Not every game benefits from affinity tuning — many are hurt by it. Only the two cases with clear evidence (E-core avoidance on hybrid Intel, V-Cache preference on AMD X3D) are applied."
+  }
+}
