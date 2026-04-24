@@ -2,6 +2,10 @@
 
 PowerShell toolkit for safely optimizing a Windows 10 / Windows 11 PC for MMO gaming. Ships with a first-class profile for Black Desert Online and a generic framework any game can plug into.
 
+> **Looking for a step-by-step walkthrough?** → [English usage guide](INSTRUCTIONS.en.md) · [Guía de uso en español](INSTRUCTIONS.es.md)
+>
+> This README is the technical reference (what each tweak does and why). The instruction files above are friendlier walkthroughs for first-time users.
+
 **Designed around a principle:** the best optimization for gaming is not the most aggressive one. Scripts apply only tweaks with real evidence of benefit; anything folklore-heavy, vendor-specific, or with meaningful downside is either opt-in behind a flag or documented here as a manual recommendation.
 
 **Built for:** Windows 10 (1607+) and Windows 11. PowerShell 5.1 (ships with Windows — no install needed). Intel hybrid (12th/13th/14th gen + Core Ultra), Intel classic, AMD Ryzen including X3D cache-aware pinning. Ethernet and Wi-Fi (with battery-aware handling for laptops).
