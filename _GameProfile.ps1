@@ -1,6 +1,6 @@
 #Requires -Version 5.1
 <#
-    _GameProfile.ps1 — dot-sourced helper.
+    _GameProfile.ps1 - dot-sourced helper.
 
     Loads games.json and resolves an abstract affinity strategy against a
     live CPU topology into a concrete UInt64 affinity mask.
@@ -78,7 +78,7 @@ function Get-GameProfile {
 }
 
 # ------------------------------------------------------------------
-#  Strategy selector — chooses a strategy name for the current topology
+#  Strategy selector - chooses a strategy name for the current topology
 # ------------------------------------------------------------------
 function Select-StrategyForTopology {
     <#
@@ -292,7 +292,7 @@ function Resolve-AffinityMask {
 }
 
 # ------------------------------------------------------------------
-#  Reference mask lookup — validates our computation against ACanadianDude's guide
+#  Reference mask lookup - validates our computation against ACanadianDude's guide
 # ------------------------------------------------------------------
 function Get-ReferenceMaskForCpu {
     <#

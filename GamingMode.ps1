@@ -15,7 +15,7 @@
       - Connection quality test (ping/jitter to DNS + default gateway).
       - Advisory list of resource-heavy apps still running.
       - Informational reports:
-          VBS / HVCI (Memory Integrity) status — documented 3-8% CPU cost in
+          VBS / HVCI (Memory Integrity) status - documented 3-8% CPU cost in
           games; the script only REPORTS this, it does not toggle it (security
           tradeoff belongs to the user).
 
@@ -227,12 +227,12 @@ try {
     if ($dg.SecurityServicesRunning) { $hvciRunning = ($dg.SecurityServicesRunning -contains 2) }
 
     if ($vbsRunning) {
-        Write-Status 'VBS (Virtualization-Based Security): RUNNING — documented 3-8% CPU cost in games.' 'WARN'
+        Write-Status 'VBS (Virtualization-Based Security): RUNNING - documented 3-8% CPU cost in games.' 'WARN'
     } else {
         Write-Status 'VBS: not running.' 'OK'
     }
     if ($hvciRunning) {
-        Write-Status 'HVCI (Memory Integrity): RUNNING — additional cost on top of VBS.' 'WARN'
+        Write-Status 'HVCI (Memory Integrity): RUNNING - additional cost on top of VBS.' 'WARN'
         Write-Status '      Toggle at: Settings > Windows Security > Device Security > Core isolation' 'INFO'
         Write-Status '      Tradeoff: disabling improves perf but reduces kernel-driver isolation.' 'INFO'
     }
@@ -415,7 +415,7 @@ if ($SkipNetwork) {
         Write-Host ''
         Write-Status 'Network optimization complete' 'OK'
     } else {
-        Write-Status 'NetworkOptimize.ps1 not found in this folder — skipped.' 'WARN'
+        Write-Status 'NetworkOptimize.ps1 not found in this folder - skipped.' 'WARN'
     }
 }
 

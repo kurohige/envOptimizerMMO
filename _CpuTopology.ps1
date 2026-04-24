@@ -1,6 +1,6 @@
 #Requires -Version 5.1
 <#
-    _CpuTopology.ps1 — dot-sourced helper.
+    _CpuTopology.ps1 - dot-sourced helper.
 
     Detects CPU topology via Win32 GetLogicalProcessorInformationEx:
       - Physical cores with their logical-processor (SMT sibling) bitmask.
@@ -236,7 +236,7 @@ function Get-CpuTopology {
     # P/E core classification by RELATIVE efficiency class ranking, not hardcoded 0/1.
     # Per MS Learn: "A core with a higher value for the efficiency class has intrinsically
     # greater performance and less efficiency." Future Intel hybrids (e.g. Core Ultra with
-    # P + E + LP-E) may have 3+ classes — ranking is forward-compatible.
+    # P + E + LP-E) may have 3+ classes - ranking is forward-compatible.
     if ($native.IsHybrid) {
         $maxEff = ($native.PhysicalCores | Measure-Object -Property EfficiencyClass -Maximum).Maximum
         $pCores = @($native.PhysicalCores | Where-Object { $_.EfficiencyClass -eq $maxEff })

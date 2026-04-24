@@ -1,7 +1,7 @@
 #Requires -Version 5.1
 # NOTE: Administrator is required only when actually modifying a process
 # (SetProcessAffinityMask on protected processes). -ShowTopology and -DryRun
-# work unelevated — useful for inspecting your CPU without risk.
+# work unelevated - useful for inspecting your CPU without risk.
 <#
 .SYNOPSIS
     Generic CPU-affinity manager for MMO/online games. Profile-driven.
@@ -10,7 +10,7 @@
     Replaces the BDO-specific affinity script with a generalized, topology-aware
     version. Reads game profiles from games.json and applies per-family affinity
     strategies derived from detected CPU topology (P/E cores, AMD CCDs, X3D
-    V-Cache die). No hardcoded hex masks — everything is computed at runtime.
+    V-Cache die). No hardcoded hex masks - everything is computed at runtime.
 
     Two operating modes:
 
@@ -22,7 +22,7 @@
       Launcher-inherit mode (-LaunchGame <path>)
         Starts the launcher EXE with the affinity mask pre-applied via
         `cmd /c start /affinity`. The game process inherits the mask before
-        EAC attaches — the canonical BDO-community approach per ACanadianDude's
+        EAC attaches - the canonical BDO-community approach per ACanadianDude's
         guide. Preferred when your anti-cheat blocks post-launch affinity
         changes.
 
@@ -179,7 +179,7 @@ function Set-ProcessAffinityAndPriority {
     $h = [EnvOptimizer.AffinityNative]::OpenProcess($access, $false, [uint32]$ProcessId)
     if ($h -eq [IntPtr]::Zero) {
         $err = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error()
-        Write-LogLine ("OpenProcess failed for PID {0}. Win32 error {1} — make sure you're elevated." -f $ProcessId, $err) 'ERROR'
+        Write-LogLine ("OpenProcess failed for PID {0}. Win32 error {1} - make sure you're elevated." -f $ProcessId, $err) 'ERROR'
         return $false
     }
 
@@ -340,7 +340,7 @@ if ($DryRun) {
 }
 
 # Watchdog until ALL matching processes exit (or Ctrl+C).
-# Not a fixed-duration loop — we keep reapplying as long as the game is running,
+# Not a fixed-duration loop - we keep reapplying as long as the game is running,
 # in case anti-cheat resets the mask or child processes spawn with a different one.
 Write-LogLine 'Watchdog active. Running until game exits (Ctrl+C to stop early).'
 $knownState = @{}

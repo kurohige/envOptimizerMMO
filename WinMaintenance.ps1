@@ -144,7 +144,7 @@ if (Test-Path $wuPath) {
 Write-Log "[4/9] Clearing Delivery Optimization cache..."
 if (-not $DryRun) {
     # Cmdlet is in the DeliveryOptimization module (Windows 10 1703+). Its verb is
-    # "Delete" (an unapproved PS verb), so PowerShell will warn on import — that's
+    # "Delete" (an unapproved PS verb), so PowerShell will warn on import - that's
     # normal. We guard with Get-Command to skip gracefully on older SKUs where the
     # module is absent (e.g. some LTSC and IoT editions).
     if (Get-Command -Name 'Delete-DeliveryOptimizationCache' -ErrorAction SilentlyContinue) {

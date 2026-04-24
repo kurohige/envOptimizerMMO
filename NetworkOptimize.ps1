@@ -36,9 +36,9 @@
           effect on steady-state gameplay ping. Useful if your ISP DNS is slow or unreliable.
 
     Tweaks REMOVED vs. earlier versions (they were no-ops on modern Windows):
-      - `netsh int tcp set global autotuninglevel=normal` — "normal" is already the default.
-      - Disabling ECN — already disabled on the Internet template by default.
-      - Disabling TCP timestamps — already disabled by default.
+      - `netsh int tcp set global autotuninglevel=normal` - "normal" is already the default.
+      - Disabling ECN - already disabled on the Internet template by default.
+      - Disabling TCP timestamps - already disabled by default.
 
     Safety:
       - Full registry backup to backups\ before any change.
@@ -70,7 +70,7 @@
     .\NetworkOptimize.ps1 -AggressiveTcp -SetDNS cloudflare
 
 .EXAMPLE
-    # Laptop on Wi-Fi — skip the aggressive stuff
+    # Laptop on Wi-Fi - skip the aggressive stuff
     .\NetworkOptimize.ps1
 #>
 
@@ -263,7 +263,7 @@ if ($SkipNetworkThrottling) {
 }
 
 # ============================================================
-#  4. Aggressive TCP (OPT-IN) — per-interface TcpNoDelay / TcpAckFrequency
+#  4. Aggressive TCP (OPT-IN) - per-interface TcpNoDelay / TcpAckFrequency
 # ============================================================
 Write-Log ''
 if ($AggressiveTcp) {
